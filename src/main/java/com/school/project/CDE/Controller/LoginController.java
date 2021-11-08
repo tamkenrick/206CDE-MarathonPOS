@@ -1,5 +1,7 @@
 package com.school.project.CDE.Controller;
 
+import com.school.project.CDE.Dao.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,4 +15,9 @@ public class LoginController {
     public String login(){
         return "login";
     }
+
+    @Autowired
+    MemberRepository memberRepository;
+
+
 }
