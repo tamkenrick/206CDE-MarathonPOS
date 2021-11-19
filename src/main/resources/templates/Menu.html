@@ -14,6 +14,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <style>
+    .visible{
+      visibility:visible !important;
+    }
+    .hidden{
+      visibility:hidden;
+    }
     .left-panel{
       background-color:#edeef4;
       height:100%;
@@ -118,15 +124,6 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Order</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Report</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Invoice</a>
-                  </li>
                   <input class="search" type="text" placeholder="Search Item..">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                   <li class="nav-item" style="margin-left: 250px;">
@@ -137,10 +134,10 @@
             </nav>
             <div class="container">
               <div class="tab">
-                <button class="tablinks" onclick="openTab(event, 'brand')">Brand</button>
-                <button class="tablinks" onclick="openTab(event, 'type')">Type</button>
+                <button class="tablinks active" onclick="openTab(event, 'brand')">Brand</button>
+<!--                <button class="tablinks" onclick="openTab(event, 'type')">Type</button>-->
               </div>
-              <div id="brand" class="tabcontent button-container">
+              <div id="brand" class="tabcontent button-container" style="display: block;">
                 <a href="#/Adidas" class="button">
                   <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter">
                     <img th:src="@{/img/brand/Adidas_Logo.svg}">
@@ -251,7 +248,7 @@
                         <td>UK 7</td>
                         <td>$499</td>
                         <td contenteditable="false">
-                          <button type="button" class="btn btn-primary editbtn">Add to cart</button>
+                          <button type="button" class="btn btn-primary editbtn" onclick="AddtoCart(0)">Add to cart</button>
                         </td>
                       </tr>
                         <tr>
@@ -263,7 +260,7 @@
                         <td>UK 7</td>
                         <td>$499</td>
                         <td contenteditable="false">
-                          <button type="button" class="btn btn-primary editbtn">Add to cart</button>
+                          <button type="button" class="btn btn-primary editbtn" onclick="AddtoCart(1)">Add to cart</button>
                         </td>
                       </tr>
                         <tr>
@@ -275,7 +272,7 @@
                         <td>UK 7</td>
                         <td>$499</td>
                         <td contenteditable="false">
-                          <button type="button" class="btn btn-primary editbtn">Add to cart</button>
+                          <button type="button" class="btn btn-primary editbtn" onclick="AddtoCart(2)">Add to cart</button>
                         </td>
                       </tr>
                       </tbody>
@@ -293,7 +290,7 @@
         </div>
         <div class="col-lg-5 right-panel">
           <div class="container container-right">
-            <h1 style="margin-bottom:50px;">Add To Cart</h1>
+            <h1 style="margin-bottom:50px;">Checkout List</h1>
             <table id="tableone" class="table table-striped table-light table-bordered" border="1">
               <thead>
               <tr>
@@ -307,8 +304,8 @@
               </tr>
               </thead>
 
-              <tbody>
-                <tr>
+              <tbody class="checkout_content">
+                <tr class="checkout-item hidden">
                 <td>AD0SHSXM-B7</td>
                 <td>Addidas</td>
                 <td>Supernova x Marimekko</td>
@@ -322,7 +319,7 @@
                             <span class="glyphicon glyphicon-minus">-</span>
                         </button>
                     </span>
-                    <input type="text" name="quant[1]" class="form-control input-number" value="1" min="0" max="20">
+                    <input type="text" name="quant[1]" id="shoes" onchange="calculator()" class="form-control input-number" value="1" min="0" max="20">
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
                         <span class="glyphicon glyphicon-plus">+</span>
@@ -331,7 +328,7 @@
                   </div>
                 </td>
               </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -354,7 +351,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -377,7 +374,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -400,7 +397,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -423,7 +420,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -446,7 +443,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -469,7 +466,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="checkout-item hidden">
                   <td>AD0SHSXM-B7</td>
                   <td>Addidas</td>
                   <td>Supernova x Marimekko</td>
@@ -495,19 +492,67 @@
               </tbody>
             </table>
             <div style="float:right">
-              <h3><b>Total: $1424</b></h3>
+              <h3><b>Total: $<span id="totalAmount"/></b></h3>
             </div>
             <div class="row col-lg-12">
               <div class="col-lg-6">
-                <button style="height:50px;width:300px" data-toggle="modal" data-target="#invoiceModal" type="button" class="btn btn-primary">Checkout</button>
+                <div class="row">
+                  <input type="text" style="height:36px !important;" id="promotionCode" placeholder="Promotion Code ..." onchange="Promotion()" class="form-control">
+<!--                  <button style="height:50px;width:300px" data-toggle="modal" data-target="#invoiceModal" type="button" class="btn btn-primary">Checkout</button>-->
+                </div>
+
               </div>
               <div class="col-lg-6">
-                <button style="height:50px;width:300px" type="button" class="btn btn-primary">Payment</button>
+                <button style="height:50px;width:300px" data-toggle="modal" data-target="#paymentModal" type="button" class="btn btn-primary">Payment</button>
               </div>
             </div>
           </div>
         </div>
-        <!-- Modal -->
+
+        <!-- Payment Modal -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="Title">Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div class="button-container" style="display: block;height:600px;padding-left:0px;background:white;">
+                    <a href="#" class="button">
+                      <button  type="button" class="btn btn-light" data-toggle="modal" data-target="#invoiceModal">
+                        <img th:src="@{/img/brand/Cash.svg}">
+                      </button>
+                      Cash
+                    </a>
+                    <a href="#" class="button">
+                      <button type="button" class="btn btn-light" data-toggle="modal" data-target="#invoiceModal">
+                        <img th:src="@{/img/brand/Visa.svg}">
+                      </button>
+                      Visa
+                    </a>
+                    <a href="#" class="button">
+                      <button type="button" class="btn btn-light" data-toggle="modal" data-target="#invoiceModal">
+                        <img th:src="@{/img/brand/Mastercard.svg}">
+                      </button>
+                      Mastercard
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Print</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!--Invoice Modal -->
         <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -523,7 +568,7 @@
                     <h3>Marathon Sports</h3>
                     <span>Shop 513, Phase I</span>
                     <span>New Town Plaza, Shatin</span><br>
-                    <span>Create Time: 15/11/2021 21:40:17</span>
+                    <span>Create Time: <span id="currenttime"></span></span>
                     <br><br>
                     <span>Receipt</span>
                   </div>
@@ -535,52 +580,56 @@
                       <div class="col-lg-2">Price</div>
                     </div>
                     <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
+                      <div class="col-lg-2">5</div>
                       <div class="col-lg-6">Supernova x Marimekko</div>
                       <div class="col-lg-2">100%</div>
                       <div class="col-lg-2">$499</div>
                     </div>
-                    <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
-                      <div class="col-lg-6">Supernova x Marimekko</div>
-                      <div class="col-lg-2">100%</div>
-                      <div class="col-lg-2">$499</div>
-                    </div>
-                    <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
-                      <div class="col-lg-6">Supernova x Marimekko</div>
-                      <div class="col-lg-2">100%</div>
-                      <div class="col-lg-2">$499</div>
-                    </div>
-                    <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
-                      <div class="col-lg-6">Supernova x Marimekko</div>
-                      <div class="col-lg-2">100%</div>
-                      <div class="col-lg-2">$499</div>
-                    </div>
-                    <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
-                      <div class="col-lg-6">Supernova x Marimekko</div>
-                      <div class="col-lg-2">100%</div>
-                      <div class="col-lg-2">$499</div>
-                    </div>
-                    <div class="row col-lg-12">
-                      <div class="col-lg-2">1</div>
-                      <div class="col-lg-6">Supernova x Marimekko</div>
-                      <div class="col-lg-2">100%</div>
-                      <div class="col-lg-2">$499</div>
-                    </div>
+<!--                    <div class="row col-lg-12">-->
+<!--                      <div class="col-lg-2">1</div>-->
+<!--                      <div class="col-lg-6">Supernova x Marimekko</div>-->
+<!--                      <div class="col-lg-2">100%</div>-->
+<!--                      <div class="col-lg-2">$499</div>-->
+<!--                    </div>-->
+<!--                    <div class="row col-lg-12">-->
+<!--                      <div class="col-lg-2">1</div>-->
+<!--                      <div class="col-lg-6">Supernova x Marimekko</div>-->
+<!--                      <div class="col-lg-2">100%</div>-->
+<!--                      <div class="col-lg-2">$499</div>-->
+<!--                    </div>-->
+<!--                    <div class="row col-lg-12">-->
+<!--                      <div class="col-lg-2">1</div>-->
+<!--                      <div class="col-lg-6">Supernova x Marimekko</div>-->
+<!--                      <div class="col-lg-2">100%</div>-->
+<!--                      <div class="col-lg-2">$499</div>-->
+<!--                    </div>-->
+<!--                    <div class="row col-lg-12">-->
+<!--                      <div class="col-lg-2">1</div>-->
+<!--                      <div class="col-lg-6">Supernova x Marimekko</div>-->
+<!--                      <div class="col-lg-2">100%</div>-->
+<!--                      <div class="col-lg-2">$499</div>-->
+<!--                    </div>-->
+<!--                    <div class="row col-lg-12">-->
+<!--                      <div class="col-lg-2">1</div>-->
+<!--                      <div class="col-lg-6">Supernova x Marimekko</div>-->
+<!--                      <div class="col-lg-2">100%</div>-->
+<!--                      <div class="col-lg-2">$499</div>-->
+<!--                    </div>-->
                     <div class="row col-lg-12" style="margin-top:50px;">
                       <div class="col-lg-10"><b>ITEM TOTAL</b></div>
-                      <div class="col-lg-2"><b>$1424</b></div>
+                      <div class="col-lg-2"><b>$2495</b></div>
                     </div>
                     <div class="row col-lg-12">
                       <div class="col-lg-10"><b>PLASTIC BAG FEE</b></div>
                       <div class="col-lg-2"><b>$0.5</b></div>
                     </div>
+                    <div class="row col-lg-12">
+                      <div class="col-lg-10"><b>Discount</b></div>
+                      <div class="col-lg-2"><b>($249.5)</b></div>
+                    </div>
                     <div class="row col-lg-12" style="margin-bottom:50px;">
                       <div class="col-lg-10"><b>TOTAL</b></div>
-                      <div class="col-lg-2"><b>$1424.5</b></div>
+                      <div class="col-lg-2"><b>$2246</b></div>
                     </div>
                     <div class="row col-lg-12">
                       <div class="col-lg-10"><b>Payment Method</b></div>
@@ -588,7 +637,7 @@
                     </div>
                     <div class="row col-lg-12">
                       <div class="col-lg-10">&nbsp<b>ACCOUNT #: ***********0123</b></div>
-                      <div class="col-lg-2"><b>$1424.5</b></div>
+                      <div class="col-lg-2"><b>$2246</b></div>
                     </div>
                     <div class="row col-lg-12" style="margin-bottom:100px;">
                       <div class="col-lg-10"><b>CHANGE DUE</b></div>
@@ -599,7 +648,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Print</button>
               </div>
             </div>
           </div>
@@ -611,6 +660,19 @@
   <!-- /#wrapper -->
 
   <script>
+    var datetime = new Date();
+    document.getElementById('currenttime').innerHTML=datetime;
+    document.getElementById('totalAmount').innerHTML = 0;
+
+    function AddtoCart(i){
+      checkitem = document.getElementsByClassName("checkout-item");
+      console.log(checkitem);
+      checkitem[i].className = checkitem[i].className.replace(" hidden", "");
+      total = 499;
+      document.getElementById('totalAmount').innerHTML = "499";
+      console.log(checkitem[i]);
+    }
+
     function openTab(evt, tabName) {
       // Declare all variables
       var i, tabcontent, tablinks;
@@ -618,7 +680,7 @@
       // Get all elements with class="tabcontent" and hide them
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "block";
       }
 
       // Get all elements with class="tablinks" and remove the class "active"
@@ -630,6 +692,94 @@
       // Show the current tab, and add an "active" class to the button that opened the tab
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+    }
+
+    $('.btn-number').click(function(e){
+        e.preventDefault();
+        fieldName = $(this).attr('data-field');
+        type      = $(this).attr('data-type');
+        var input = $("input[name='"+fieldName+"']");
+        var currentVal = parseInt(input.val());
+        if (!isNaN(currentVal)) {
+            if(type == 'minus') {
+                if(currentVal > input.attr('min')) {
+                    input.val(currentVal - 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('min')) {
+                    $(this).attr('disabled', true);
+                } if(input.val() == 0){
+                    checkitem = document.getElementsByClassName("checkout-item");
+                    console.log(checkitem);
+                    checkitem[0].className = checkitem[0].className.replace("checkout-item", "checkout-item hidden");
+                }
+
+            } else if(type == 'plus') {
+
+                if(currentVal < input.attr('max')) {
+                    input.val(currentVal + 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('max')) {
+                    $(this).attr('disabled', true);
+                }
+            }
+        } else {
+            input.val(0);
+        }
+    });
+
+    $('.input-number').focusin(function(){
+       $(this).data('oldValue', $(this).val());
+    });
+    $('.input-number').change(function() {
+
+        minValue =  parseInt($(this).attr('min'));
+        maxValue =  parseInt($(this).attr('max'));
+        valueCurrent = parseInt($(this).val());
+
+        name = $(this).attr('name');
+        if(valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the minimum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        if(valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the maximum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+    });
+    $(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    function calculator(){
+      var quantity = document.getElementById('shoes').value;
+      total = Number(quantity)*499
+      console.log(Number(quantity)*499);
+      document.getElementById('totalAmount').innerHTML = Number(quantity)*499;
+    }
+
+    function Promotion(){
+      var promo = document.getElementById('promotionCode').value
+      console.log(promo)
+      if(promo == "BLACK2021"){
+        var quantity = document.getElementById('shoes').value;
+        document.getElementById('totalAmount').innerHTML = (Number(quantity)*499)*0.9;
+      }
     }
   </script>
 
